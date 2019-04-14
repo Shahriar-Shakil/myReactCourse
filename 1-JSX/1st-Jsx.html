@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Introducing JSX</title>
+</head>
+<body>
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+  //A JSX element
+    const JSX = <h1>Hello JSX!</h1>;
+
+//       Create a Complex JSX Element
+//       One important thing to know about nested JSX is that it must return a single element.
+// This one parent element would wrap all of the other levels of nested elements.
+   
+     const jsx2 = <div>
+                    <p>Paragraph One</p>
+                    <p>Paragraph Two</p>
+                    <p>Paragraph Three</p>
+                 </div>
+    //console.log(jsx2)
+
+   //Rendering Elements
+
+    // ReactDOM.render(WHAT DO I WANT TO RENDER, WHERE DO I WANT TO RENDER IT)
+    
+   ReactDOM.render(JSX, document.getElementById("root"))
+
+  /* Define an HTML Class in JSX
+   So far, it may seem that HTML and JSX are exactly the same.
+   One key difference in JSX is that you can no longer use the word class to define HTML classes.
+   This is because class is a reserved word in JavaScript. Instead, JSX uses className.
+   In fact, the naming convention for all HTML attributes and event references in JSX become camelCase.
+    For example, a click event in JSX is onClick, instead of onclick.
+   */
+   const JSXX = (
+  <div className="myDiv" >
+    <h1 >Add a class to this div</h1>
+  </div>
+);
+    
+/* Objective: Fill in the boilerplate React code required to render an
+ unordered list (<ul>) to the page. The list should contain 3 list items
+ (<li>) with anything in them you want.
+
+
+    */
+    </script>
+</body>
+</html>

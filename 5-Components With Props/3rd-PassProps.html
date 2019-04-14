@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Passing Props</title>
+<style>
+body {
+    margin: 0;
+}
+
+.contacts {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contact-card {
+    flex-basis: 250px;
+    margin: 20px;
+}
+
+.contact-card > img {
+    width: 100%;
+    height: auto;
+}
+
+.contact-card > h3 {
+    text-align: center;
+}
+
+.contact-card > p {
+    font-size: 12px;
+}
+</style>
+</head>
+<body>
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+//1. pass props on a stateless component
+
+ const CurrentDate = (props) => {
+  return (
+    <div>
+      <p>The current date is:{props.date} </p>
+    </div>
+  );
+};
+
+class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>What date is it?</h3>
+        <CurrentDate date={Date()}/>
+      </div>
+    );
+  }
+};
+//ReactDOM.render(<Calendar/>, document.getElementById("root"))
+  
+//2 . pass An Array as a Props 
+
+const List= (props) => {
+ // console.log(props)
+  return <p>{props.tasks.join(", ")}</p>
+  
+};
+
+class ToDo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>To Do Lists</h1>
+        <h2>Today</h2>
+       
+        <List tasks={["Walk", "Cook", "Game"]}/>
+        <h2>Tomorrow</h2>
+        <List tasks={["Study", "Code", "Eat"]}/>
+        
+      </div>
+    );
+  }
+};
+//ReactDOM.render(<ToDo/>, document.getElementById("root"))
+
+/* 
+ if the child component that you're passing a prop to is an ES6 class 
+ component, rather than a stateless functional component then use
+ (this.props)
+*/
+
+// 2. 
+function ContactCard(props) {
+    return (
+        <div className="contact-card">
+            <img src={props.contact.imgUrl}/>
+            <h3>{props.contact.name}</h3>
+            <p>Phone: {props.contact.phone}</p>
+            <p>Email: {props.contact.email}</p>
+        </div>
+    )
+}
+function App() {
+    return (
+        <div className="contacts">
+            <ContactCard 
+                contact={{name: "Mr. Whiskerson", imgUrl: "http://placekitten.com/300/200", phone: "(212) 555-1234", email: "mr.whiskaz@catnap.meow"}}
+            />
+            <ContactCard 
+                contact={{name: "Fluffykins", imgUrl: "http://placekitten.com/400/200", phone: "(212) 555-2345", email: "fluff@me.com"}}
+            />
+            
+            <ContactCard
+                contact={{name: "Destroyer", imgUrl: "http://placekitten.com/400/300", phone: "(212) 555-3456", email: "ofworlds@yahoo.com"}}
+            />
+            
+            <ContactCard 
+                contact={{name: "Felix", imgUrl: "http://placekitten.com/200/100", phone: "(212) 555-4567", email: "thecat@hotmail.com"}}
+            />
+
+           
+           
+            
+        </div>
+    )
+}
+ReactDOM.render(<App/>, document.getElementById("root"))
+
+    </script>
+</body>
+</html>

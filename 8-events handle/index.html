@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Handling Events in React </title>
+</head>
+<body>
+   
+    <div id="root"></div>
+
+    <script type="text/babel">
+class ShowAlert extends React.Component {
+  showAlert() {
+    alert("Im an alert");
+  }
+
+  render() {
+    return <button onClick={this.showAlert}>show alert</button>;
+  }
+}
+const rootElement = document.getElementById("root");
+//ReactDOM.render(<ShowAlert />, rootElement);
+
+// this means that whenever the button is clicked on,
+// the showAlert function is called which in turns shows the alert box.
+    
+    //Binding in render()
+    class ChangeInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: ""
+    };
+    //Binding in constructor()
+  }
+  changeText(event) {
+    this.setState({
+      name: event.target.value
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <label htmlFor="name">Enter Text here </label>
+        <input type="text" id="name" onChange={this.changeText.bind(this)} />
+        <h3>{this.state.name}</h3>
+      </div>
+    );
+  }
+}
+//ReactDOM.render(<ChangeInput />, rootElement)
+
+//Custom components and events
+class CustomButton extends React.Component {
+  render() {
+    const { onPress, children } = this.props;
+
+    return (
+      <button type="button" onClick={onPress}>
+        {children}
+      </button>
+    );
+  }
+  class ChangeInput extends React.Component {
+  handleEvent = () => {
+    alert("I was clicked");
+  };
+
+  render() {
+    return (
+      <div>
+        <CustomButton onPress={this.handleEvent}>Click on me</CustomButton>
+      </div>
+    );
+  }
+}
+}
+//ReactDOM.render(<ChangeInput />, rootElement)
+
+
+    </script>
+</body>
+</html>

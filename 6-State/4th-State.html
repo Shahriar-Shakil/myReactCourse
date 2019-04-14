@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Statefull component</title>
+</head>
+<body>
+   
+    <div id="root"></div>
+
+    <script type="text/babel">
+/*
+One of the most important topics in React is state. State consists of
+ any data your application needs to know about, that can change over time. 
+*/
+// Render State in the User Interface
+class App1 extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            name: "Sally",
+            age: 13
+        }
+    }
+    
+    render() {
+        return (
+            <div>
+                <h1>{this.state.name}</h1>
+                <h3>{this.state.age} years old</h3>
+            </div>
+        )    
+    }
+}
+//ReactDOM.render(<App />, document.getElementById("root"))
+
+// Render State in the User Interface Another Way
+/*
+There is another way to access state in a component. In the render() method, before the return statement,
+ you can write JavaScript directly. For example, you could declare functions, access data from state or props,
+ perform computations on this data, and so on. Then, you can assign any data to variables, which you have access to in the return statement.
+ */
+
+class App extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            isLoggedIn: false
+        }
+    }
+    
+    render() {
+        let wordDisplay
+        if (this.state.isLoggedIn) {
+            wordDisplay = "in"
+        } else {
+            wordDisplay = "out"
+        }
+        return (
+            <div>
+                <h1>You are currently logged {wordDisplay}</h1>
+            </div>
+        )
+    }
+}
+//ReactDOM.render(<App />, document.getElementById("root"))
+
+//Pass State as Props to Child Components
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Shahriar'
+    }
+  }
+  render() {
+    return (
+       <div>
+         <Navbar name={this.state.name} />
+       </div>
+    );
+  }
+};
+
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+     // console.log(this.props)
+    return (
+    <div>
+      <h1>Hello, my name is: {this.props.name} </h1>
+    </div>
+    );
+  }
+};
+//ReactDOM.render(<MyApp />, document.getElementById("root"))
+
+// now lets move on setState()
+/*
+setState is a powerful method that make react dynamic
+state does it from inside and props does it from outside
+state is often called local or encapsulated. It is not accessible 
+to any component other than the one that owns and sets it.
+ */
+
+ class MyComponents extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Initial State'
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+   this.setState({name:"modified state"})
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>Click Me</button>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+//ReactDOM.render(<MyComponents />, document.getElementById("root"))
+
+// Use State to Toggle an element 
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibility: false
+    };
+   this.toggleVisibility=this.toggleVisibility.bind(this)
+  }
+ toggleVisibility(){
+   this.setState((prevState)=>{
+    return{
+       visibility: !prevState.visibility
+   }
+   }
+   
+   )
+ }
+  render() {
+    if (this.state.visibility) {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+          <h1>Now you see me!</h1>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+        </div>
+      );
+    }
+  }
+};
+ReactDOM.render(<MyComponent />, document.getElementById("root"))
+
+
+
+    </script>
+    <script>
+
+//
+
+
+
+    </script>
+</body>
+</html>

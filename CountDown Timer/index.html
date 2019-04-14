@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+    <title>CountDown Timer</title>
+</head>
+<body>
+   
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+const Header = () => <h1>CountDown Timer</h1>
+
+const Input = ({handleChage}) =>(
+  <div>
+  <h3>Input Your Desired Time</h3>
+  <input type="number" onChange={handleChage} required/>
+    </div>
+)
+const Controls = ({active,handlePlayPause,handleReset}) => (
+  <div className='Controls'>
+  <button id='start_stop' onClick={handlePlayPause}>
+  {active ? <span>&#10074;&#10074;</span> :<span>&#9658;</span>}
+  </button>
+  <button id = 'reset' onClick={handleReset}>&#8635;</button>
+  </div>
+)
+class Timer extends React.Component{
+  constructor(props){
+    super(props)
+   this.state={
+     
+     time:0,
+     active:false
+   }
+  }
+  handlePlayPause =()=>{
+    if(this.state.active){
+      clearInterval(this.timer)
+      this.setState({active:false})
+    }else{
+      this.timer=setInterval(()=>this.setState({time:this.state.time-1000}),1000)
+      this.setState({active:true})
+    }
+    
+  }
+  handleChange=(e)=>{
+    let time = e.target.value * 60 * 1000
+    this.setState({time})
+    //this.setState({time:e.target.value})
+  }
+  handleReset=()=>{
+    this.setState({time:0,active:false})
+    clearInterval(this.timer)
+  }
+  
+  render(){
+    const time = moment(this.state.time).format('mm:ss')
+    
+    return(
+    <div>
+      <Header />
+        <Input handleChage={this.handleChange}/>
+      
+      <h2>{time}</h2>
+      <Controls active={this.state.active}
+      handleReset={this.handleReset}
+      handlePlayPause={this.handlePlayPause}
+  />
+        
+      </div>
+    )
+  }
+}
+ReactDOM.render(<Timer /> ,document.getElementById("root"))
+
+    </script>
+</body>
+</html>

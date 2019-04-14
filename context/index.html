@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Context</title>
+</head>
+<body>
+
+    <div id="root"></div>
+
+
+    <script type="text/babel">
+
+      //frist we will make a new context
+      const MyContext = React.createContext();
+      //then create a provider component
+
+      class MyProvider extends React.Component {
+        state = {
+          name: "Pondit",
+          age: 100,
+          cool: true
+        };
+        render() {
+          return (
+            <MyContext.Provider value={{
+              state:this.state,
+              growAgeYear:()=>this.setState({
+                age:this.state.age + 1
+              })
+              }}>
+              {this.props.children}
+            </MyContext.Provider>
+          );
+        }
+      }
+
+      class Family extends React.Component {
+        render() {
+          return (
+            <div className="family">
+              <Person />
+            </div>
+          );
+        }
+      }
+      class Person extends React.Component {
+        render() {
+          return (
+            <div className="person">
+             <MyContext.Consumer>
+              {(context)=>(
+                <>
+                <p>name:{context.state.name}</p>
+                <p>age:{context.state.age}</p>
+                <button onClick={context.growAgeYear}>Age grow</button>
+              </>
+              )}
+             </MyContext.Consumer>
+            </div>
+          );
+        }
+      }
+
+      class App extends React.Component {
+        state = {
+          name: "Pondit",
+          age: 100,
+          cool: true
+        };
+        render() {
+          return (
+            <MyProvider>
+              <div>
+                <p> I'm the app</p>
+                <Family />
+              </div>
+            </MyProvider>
+          );
+        }
+      }
+
+
+ReactDOM.render(<App />,document.getElementById("root"))
+      </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin="anonymous" src="https://unpkg.com/react@16.8.3/umd/react.development.js"></script>
+<script crossorigin="anonymous" src="https://unpkg.com/react-dom@16.8.3/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>  
+      <title>default props</title>
+
+</head>
+<body>
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+// const ShoppingCart = (props) => {
+//   return (
+//     <div>
+//       <h1>Shopping Cart Component</h1>
+//       <p>items:{props.items}</p>
+//     </div>
+//   )
+// };
+// ShoppingCart.defaultProps = {
+//   items: 0
+// }
+// ReactDOM.render(<ShoppingCart items={20}/>, document.getElementById("root"))
+
+//2.
+// const Items = (props) => {
+//   return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+// };
+// Items.propTypes = {
+//   quantity: PropTypes.number
+// };
+
+// Items.defaultProps = {
+//   quantity: 0
+// };
+
+// class ShoppingCart extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
+//   render() {
+//     return <Items quantity={20}/>
+//   }
+// };
+// ReactDOM.render(<ShoppingCart/>, document.getElementById("root"))
+
+//3.
+
+const Test = (props) => {
+    return(
+        <>
+        <h1>{props.str}</h1>
+        <h1>{props.bool ?"bool":"no bool"}</h1>
+        <h1>{props.strOrNum}</h1>
+        <div>
+            {
+            props.arrNum.map((val)=><li key={val}>{val}</li>)
+            }
+        </div>
+        <div>
+            {
+            props.arrOfObj.map((val)=><li key={val.age}>{val.name}</li>)
+            }
+        </div>
+        <h1>{props.children}</h1>
+    </>
+    )
+}
+Test.propTypes={
+    str:PropTypes.string,
+    bool:PropTypes.bool,
+    strOrNum:PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
+    arrNum:PropTypes.arrayOf(PropTypes.number),
+    arrOfObj:PropTypes.arrayOf(PropTypes.shape(
+        {
+            name:PropTypes.string,
+            age:PropTypes.number
+        }
+    )),
+    children:PropTypes.string
+
+}
+
+class PropTypesExmpl extends React.Component {
+    
+    render() { 
+        return ( 
+            <>
+            <Test
+            str ={"pondit"} 
+            bool
+            strOrNum = {"str or num"}
+            arrNum={[1,2,3,]}
+            arrOfObj={[{name:'john',age:10},{name:"probir",age:23}]}
+            > child string </Test>
+            </>
+         );
+    }
+}
+ReactDOM.render(<PropTypesExmpl/>,document.getElementById("root"))
+
+    </script>
+</body>
+</html>

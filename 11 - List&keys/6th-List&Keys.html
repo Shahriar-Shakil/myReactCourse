@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>List & Keys</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+//Example 2
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>
+      {number}
+    </li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+//ReactDOM.render(<NumberList numbers={numbers} />,document.getElementById('root'));
+
+//Example 2
+const products = [
+    {
+        id: "1",
+        name: "Pencil",
+        price: 1,
+        description: "Perfect for those who can't remember things! 5/5 Highly recommend."
+    },
+    {
+        id: "2",
+        name: "Housing",
+        price: 0,
+        description: "Housing provided for out-of-state students or those who can't commute"
+    },
+    {
+        id: "3",
+        name: "Computer Rental",
+        price: 300,
+        description: "Don't have a computer? No problem!"
+    },
+    {
+        id: "4",
+        name: "Coffee",
+        price: 2,
+        description: "Wake up!"
+    },
+    {
+        id: "5",
+        name: "Snacks",
+        price: 0,
+        description: "Free snacks!"
+    },
+    {
+        id: "6",
+        name: "Rubber Duckies",
+        price: 3.50,
+        description: "To help you solve your hardest coding problems."
+    },
+    {
+        id: "7",
+        name: "Fidget Spinner",
+        price: 21.99,
+        description: "Because we like to pretend we're in high school."
+    },
+    {
+        id: "8",
+        name: "Sticker Set",
+        price: 14.99,
+        description: "To prove to other devs you know a lot."
+    }
+]
+function Products(props){
+  console.log(props)
+
+  return(
+ <div>
+  <h3>{props.products.name}</h3>
+  <p>{props.products.description}</p>
+  </div>
+  )
+};
+
+function App(){
+const productComponents = products.map(item=>
+<Products key={item.id} products={item}/>
+)
+
+
+  return (
+    <div>
+      {productComponents}
+      </div>
+  )
+}
+
+
+ReactDOM.render(<App />,document.getElementById('root'));
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Handling Events in React </title>
+</head>
+<body>
+   
+    <div id="root"></div>
+
+    <script type="text/babel">
+//1 
+function handleClick() {
+    console.log("I was clicked")
+}
+
+// https://reactjs.org/docs/events.html#supported-events
+
+function App() {
+    return (
+        <div>
+            <img onMouseOver={() => console.log("Hovered!")} src="https://www.fillmurray.com/200/100"/>
+            <br />
+            <br />
+            <button onClick={handleClick}>Click me</button>
+        </div>
+    )
+}
+//ReactDOM.render(<App />,document.getElementById("root"))
+
+
+
+class App2 extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            count: 0,
+            image:"https://images-na.ssl-images-amazon.com/images/G/01/aplusautomation/vendorimages/73512d0d-46c5-4540-a405-51b24261896b.jpg._CB281613289__SR285,285_.jpg"
+        }
+        /*
+any time you create a class method that you want to use setState on
+you need to bind this method  to your own class .
+*/
+        this.handleClick = this.handleClick.bind(this)
+        this.handleChange= this.handleChange.bind(this)
+    }
+    
+    handleClick() {
+        this.setState(prevState => {
+            return {
+                count: prevState.count + 1
+            }
+        })
+    }
+    handleChange(){
+this.setState({image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY6ID7LnU3i4-T5y0P03r7QC7nWwwnUxV7OGFOKawZjtqPFoa8"})
+    }
+    render() {
+        return (
+            <div>
+                <h1>{this.state.count}</h1>
+                <button onClick={this.handleClick}>Change!</button> <br />
+            <img src ={this.state.image} onMouseOver={this.handleChange}/>
+            </div>
+        )
+    }
+}
+ReactDOM.render(<App2 />,document.getElementById("root"))
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Functional Component</title>
+</head>
+<body>
+   
+    <div id="root"></div>
+
+    <script type="text/babel">
+//1. functional component
+/*
+Components are the core of React. 
+Everything in React is a component and here you will learn how to create one.
+To create a component with a function,
+ you simply write a JavaScript function that returns either JSX or null.One important thing to note is that
+  React requires your function name to begin with a capital letter.
+*/
+
+function MyApp (){
+    return (
+        <div>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <p>this is a paragraph</p>
+    </div>
+  )
+}
+//ReactDOM.render(<MyApp />, document.getElementById("root"))
+
+ //JSX to JavaScript and Back
+ function App (){
+   const firstName = "Shahriar"
+   const lastName = "Shakil"
+
+    return (
+        <h1>Hello {firstName + " " + lastName}!</h1>
+  )
+}
+ReactDOM.render(<App />, document.getElementById("root"))
+
+
+    // Objectives:
+// 1. Set up the basic React code from scratch
+// 2. Create a functional component called MyInfo that returns the following UI:
+    // a. An h1 with your name
+    // b. A paragraph with a little blurb about yourself
+    // c. An ordered or unordered list of the top 3 vacation spots you'd like to visit
+// 3. Render an instance of that functional component to the browser
+   
+
+ //  2. React Component
+ // The other way to define a React component is with the ES6 class syntax. 
+   
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() { 
+    return (
+       <div>
+         <h3>
+        The constructor is a special method used during the initialization of objects that are created with the class keyword. It is best practice to call a component's constructor with super, and pass props to both.
+         </h3>
+          <p>
+        For now, know that it is standard for this code to be included. Soon you will see other uses for the constructor as well as props.
+          </p>
+       </div> 
+       
+       );
+  }
+}
+//ReactDOM.render(<MyComponent />, document.getElementById("root"))
+ 
+// nested Component example 1
+
+const ChildComponent = () => {
+  return (
+    <div>
+      <p>I am the child</p>
+    </div>
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>I am the parent</h1>
+<ChildComponent />
+      </div>
+    );
+  }
+};
+//ReactDOM.render(<ParentComponent />, document.getElementById("root"))
+ 
+ // Last Example of this Lesson
+
+ const FrontEndLang = () => {
+  return (
+    <div>
+      <h2>Front-End Guide</h2>
+      <ul>
+        <li>HTML (not a lang at all)</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+    </div>
+  );
+};
+const FrontEndLibraries = () => {
+  return(
+    <div>
+      <h2>Front-End Libraries</h2>
+      <ul>
+        <li>Bootstrap</li>
+        <li>Sass</li>
+        <li>React</li>
+        <li>Redux</li>
+      </ul>
+    </div>
+  )
+}
+;
+
+
+
+const FrontEndGuide = () => {
+  return (
+    <div>
+    <FrontEndLang />
+    <FrontEndLibraries />
+    </div>
+  );
+};
+
+class WebDevGuide extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>fullstake devlopment:</h1>
+        <FrontEndGuide/>
+      </div>
+    );
+  }
+};
+
+//ReactDOM.render(<WebDevGuide />, document.getElementById("root"))
+
+   // Objectives: Complete WebDevGuide Component to become a fullstake develoer
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>code spliting</title>
+</head>
+<body>
+
+    <div id="root"></div>
+
+
+    <script type="text/babel">
+
+    class ErrorBoundary extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { hasError: false };
+        }
+
+        static getDerivedStateFromError(error) {
+          // Update state so the next render will show the fallback UI.
+          return { hasError: true };
+        }
+
+
+
+        render() {
+          if (this.state.hasError) {
+            // You can render any custom fallback UI
+            return <h1>Something went wrong.</h1>;
+          }
+
+          return this.props.children;
+        }
+      }
+
+      function Hero({heroName}){
+    //console.log({heroName})
+    if(heroName === "joker"){
+       throw new Error('Not a Hero')
+    }
+    return (
+        <div>
+            <h3>{heroName}</h3>
+        </div>
+    )
+}
+function App(){
+  return (
+    <div>
+    <ErrorBoundary >
+    <Hero heroName={"batMan"} />
+    </ErrorBoundary >
+    <ErrorBoundary >
+    <Hero heroName={"superMan"} />
+    </ErrorBoundary >
+    <ErrorBoundary >
+    <Hero heroName={"joker"}/>
+    </ErrorBoundary>
+    </div>
+  )
+}
+
+ReactDOM.render(<App />,document.getElementById("root"))
+      </script>
+</body>
+</html>

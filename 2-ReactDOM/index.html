@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Introducing JSX</title>
+    
+</head>
+<body>
+
+    <div id="root"></div>
+
+  <script type="text/babel">
+
+      //const rootElement = document.getElementById("root")
+    // const element = document.createElement("div")
+    // element.textContent='Hello World'
+    // element.className='container'
+    // rootElement.appendChild(element)
+
+
+    // const element = React.createElement(
+    //   "h1",
+    //   {className:"container",
+    //   children:"hello world",
+    //   }
+     
+    // )
+//console.log(element)
+
+    //2 jsx
+
+//     const content= 'Hello World'
+// const myClass="container"
+// const props={
+//   className:"container",
+//   children:"Hello World"
+// }
+//     const element = <div {...props}/>
+
+//     console.log(element)
+//     ReactDOM.render(element,rootElement)
+
+//3 reusable component
+const rootElement = document.getElementById("root")
+
+ const Message = (props)=><div>{props.Nippu} world</div>
+let greeting1={ Nippu:"Hello" }
+let greeting2={ Nippu:"hi" }
+
+const element =(
+   <div className="container">
+      <Message Nippu="hi hello" />
+      {Message(greeting2)}
+      {Message({Nippu:"hello"})}
+  
+    </div>
+)
+    ReactDOM.render(element,rootElement)
+  </script>
+
+</body>
+</html>
+<!-- assignment -->
+
+<!-- Objective: Fill in the boilerplate React code required to render an
+ unordered list (<ul>) to the page. The list should contain 3 list items
+ (<li>) with anything in them you want. -->
